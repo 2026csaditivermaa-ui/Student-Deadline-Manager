@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeadlineX - Student Deadline Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+            <div class="logo-icon">✓</div>
+            <div>
+                <h2>DeadlineX</h2>
+                <span>Student Manager</span>
+            </div>
+        </div>
+
+        <nav>
+            <button class="nav-item active" onclick="showSection('dashboard')">
+                <span>▦</span> Dashboard
+            </button>
+
+            <button class="nav-item" onclick="showSection('tasks')">
+                <span>☑</span> My Tasks
+            </button>
+
+            <button class="nav-item" onclick="showSection('addTask')">
+                <span>＋</span> Add Deadline
+            </button>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <p>Stay organized.<br>Stay ahead.</p>
+        </div>
+    </aside>
+
+
+    <!-- Main Content -->
+    <main class="main">
+
+        <!-- Top Bar -->
+        <header class="topbar">
+            <div>
+                <p class="welcome-small">STUDENT DASHBOARD</p>
+                <h1 id="pageTitle">Good evening 👋</h1>
+            </div>
+
+            <button class="add-btn" onclick="showSection('addTask')">
+                + Add Deadline
+            </button>
+        </header>
+
+
+        <!-- Dashboard -->
+        <section id="dashboard" class="section active-section">
+
+            <div class="hero">
+                <div>
+                    <span class="hero-label">YOUR ACADEMIC ORGANIZER</span>
+                    <h2>Never miss a deadline again.</h2>
+                    <p>
+                        Keep track of assignments, projects, exams and important
+                        academic tasks — all in one place.
+                    </p>
+                </div>
+
+                <div class="hero-icon">📅</div>
+            </div>
+
+
+            <!-- Statistics -->
+            <div class="stats">
+
+                <div class="stat-card">
+                    <div class="stat-icon blue">📋</div>
+                    <div>
+                        <span>Total Tasks</span>
+                        <strong id="totalTasks">0</strong>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon orange">⏳</div>
+                    <div>
+                        <span>Pending</span>
+                        <strong id="pendingTasks">0</strong>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon green">✓</div>
+                    <div>
+                        <span>Completed</span>
+                        <strong id="completedTasks">0</strong>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon red">⚠</div>
+                    <div>
+                        <span>Overdue</span>
+                        <strong id="overdueTasks">0</strong>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- Upcoming Deadlines -->
+            <div class="content-card">
+
+                <div class="card-header">
+                    <div>
+                        <h3>Upcoming Deadlines</h3>
+                        <p>Your next academic tasks</p>
+                    </div>
+
+                    <button class="view-btn" onclick="showSection('tasks')">
+                        View all →
+                    </button>
+                </div>
+
+                <div id="upcomingTasks" class="task-container">
+                    <!-- Tasks appear here -->
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Tasks Section -->
+        <section id="tasks" class="section">
+
+            <div class="section-heading">
+                <div>
+                    <span class="hero-label">YOUR WORKSPACE</span>
+                    <h2>My Tasks</h2>
+                    <p>Manage all your academic deadlines.</p>
+                </div>
+            </div>
+
+            <div class="filters">
+                <button class="filter active" onclick="filterTasks('all', this)">
+                    All
+                </button>
+
+                <button class="filter" onclick="filterTasks('pending', this)">
+                    Pending
+                </button>
+
+                <button class="filter" onclick="filterTasks('completed', this)">
+                    Completed
+                </button>
+
+                <button class="filter" onclick="filterTasks('high', this)">
+                    High Priority
+                </button>
+            </div>
+
+            <div id="allTasks" class="task-container large">
+                <!-- Tasks appear here -->
+            </div>
+
+        </section>
+
+
+        <!-- Add Task Section -->
+        <section id="addTask" class="section">
+
+            <div class="section-heading">
+                <div>
+                    <span class="hero-label">NEW DEADLINE</span>
+                    <h2>Add a Task</h2>
+                    <p>Create a reminder for your next academic deadline.</p>
+                </div>
+            </div>
+
+            <div class="form-card">
+
+                <form id="taskForm">
+
+                    <div class="form-group">
+                        <label>Task / Assignment Name</label>
+                        <input
+                            type="text"
+                            id="taskName"
+                            placeholder="e.g. Mathematics Assignment"
+                            required
+                        >
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+                            <label>Subject</label>
+                            <input
+                                type="text"
+                                id="subject"
+                                placeholder="e.g. Mathematics"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label>Due Date</label>
+                            <input
+                                type="date"
+                                id="dueDate"
+                                required
+                            >
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Priority</label>
+
+                        <div class="priority-options">
+
+                            <label class="priority-option">
+                                <input type="radio" name="priority" value="Low" checked>
+                                <span class="priority low">Low</span>
+                            </label>
+
+                            <label class="priority-option">
+                                <input type="radio" name="priority" value="Medium">
+                                <span class="priority medium">Medium</span>
+                            </label>
+
+                            <label class="priority-option">
+                                <input type="radio" name="priority" value="High">
+                                <span class="priority high">High</span>
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Notes (Optional)</label>
+
+                        <textarea
+                            id="notes"
+                            placeholder="Add any additional information..."
+                        ></textarea>
+
+                    </div>
+
+
+                    <button type="submit" class="submit-btn">
+                        + Add Deadline
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+</html>
